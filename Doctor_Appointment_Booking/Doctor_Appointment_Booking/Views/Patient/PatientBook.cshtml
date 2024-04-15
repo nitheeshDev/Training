@@ -1,0 +1,136 @@
+﻿@model Doctor_Appointment_Booking.Models.PatientModel
+
+@{
+    ViewBag.Title = "PatientBook";
+}
+
+<html>
+<head>
+
+    <title>Health hub</title>
+    <link href="~/Content/CSS/LoginCSS.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Home2.css" rel="stylesheet" />
+    <style>
+        p {
+            color: var(--primary-color);
+            text-align: center;
+            padding-top: 20px;
+        }
+        .mess{
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav__logo">
+            <img src="~/Content/Image/logo-removebg-preview.png" width="70px" height="70px" />HEALTH Hub
+        </div>
+        <ul class="nav__links">
+            <li class="link"> <a href="@Url.Action("UserPage", "Home", new { id = Session["Id"], username = Session["Username"] } )">Home</a></li>
+            <li class="link"> <a href="@Url.Action("Bokingdoctor", "DoctorBooking", new { id = Session["Id"], username = Session["Username"] })">Doctors profile</a> </li>
+            <li class="link">
+                @Html.ActionLink("Edit profile", "GetsingleDetails", "Registration_", new { id = Session["Id"], username = Session["Username"] }, null)
+            </li>
+
+            @*<li class="link">
+            <span class="custom-tooltip" data-tooltip="@ViewBag.status">Status</span>
+        </li>*@
+            <li class="link">
+                @Html.ActionLink("Status", "GetPatientStatus", "Patient", new { id = Session["Id"], username = Session["Username"] }, null)
+            </li>
+
+
+        </ul>
+        @*<small> @ViewBag.Message</small>*@
+        @Html.ActionLink("Logout", "Index", "Home", null, new { @class = "btn" })
+    </nav>
+    <p class="mess">@ViewBag.message</p>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <p>Visiting time 06 AM to 10 PM </p>
+
+        <div class="form-horizontal">
+
+            <h2>Appointment form</h2>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.patientissue, htmlAttributes: new { @class = "" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.patientissue, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.patientissue, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.visitDate, htmlAttributes: new { @class = "" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.visitDate, new { htmlAttributes = new { @class = "form-control",id="DOB" } })
+                    @Html.ValidationMessageFor(model => model.visitDate, "", new { @class = "text-danger" })
+                    <div style="padding-top:10px; color:red;">@ViewBag.Patient</div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var currentDate = new Date();
+                    var dateInput = document.getElementById('DOB');
+                    var formattedCurrentDate = currentDate.toISOString().slice(0, 10);
+                    dateInput.setAttribute('min', formattedCurrentDate);
+                });
+            </script>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.VisitTime, htmlAttributes: new { @class = "" })
+                @{
+                    var timeOptions = new List<SelectListItem>
+                       {
+                     new SelectListItem { Text = "06:00", Value = "06:00" },
+                     new SelectListItem { Text = "07:00", Value = "07:00" },
+                     new SelectListItem { Text = "08:00", Value = "08:00" },
+                     new SelectListItem { Text = "09:00", Value = "09:00" },
+                     new SelectListItem { Text = "10:00", Value = "10:00" },
+                     new SelectListItem { Text = "11:00", Value = "11:00" },
+        new SelectListItem { Text = "12:00", Value = "12:00" },
+        new SelectListItem { Text = "01:00", Value = "13:00" },
+        new SelectListItem { Text = "02:00", Value = "14:00" },
+        new SelectListItem { Text = "03:00", Value = "15:00" },
+        new SelectListItem { Text = "04:00", Value = "16:00" },
+        new SelectListItem { Text = "05:00", Value = "17:00" },
+        new SelectListItem { Text = "06:00", Value = "18:00" },
+        new SelectListItem { Text = "07:00", Value = "19:00" },
+        new SelectListItem { Text = "08:00", Value = "20:00" },
+        new SelectListItem { Text = "09:00", Value = "21:00" },
+        new SelectListItem { Text = "10:00", Value = "22:00" }
+                  };
+                }
+
+                @Html.DropDownListFor(model => model.VisitTime, timeOptions, new { @class = "form-control", @style = "margin-left: 15px;" })
+                @Html.ValidationMessageFor(model => model.VisitTime, "", new { @class = "text-danger" })
+                <div style="padding-top: 10px; color: red;">@ViewBag.Patient</div>
+
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Get appointment" class="btnlogin" />
+                </div>
+            </div>
+        </div>
+    }
+
+
+</body>
+</html>

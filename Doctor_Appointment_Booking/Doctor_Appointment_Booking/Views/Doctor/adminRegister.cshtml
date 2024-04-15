@@ -1,0 +1,119 @@
+﻿@model Doctor_Appointment_Booking.Models.AdminModel
+
+@{
+    ViewBag.Title = "adminRegister";
+}
+
+<html>
+<head>
+    <title>Health hub</title>
+    <link href="~/Content/CSS/LoginCSS.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Home2.css" rel="stylesheet" />
+    <script src="~/Scripts/My_script/admin.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="nav__logo">
+            <img src="~/Content/Image/logo-removebg-preview.png" width="60px" height="60px" />HEALTH Hub
+        </div>
+        <ul class="nav__links">
+            <li class="link">@Html.ActionLink("Admin manage", "GetAllAdminDetails", "Doctor", new { id = Session["Id"], username = Session["Username"] }, new { })</li>
+            <li class="link">@Html.ActionLink("User manage", "GetAllUserDetails", "Registration_", new { id = Session["Id"], username = Session["Username"] }, new { })</li>
+            <li class="link">@Html.ActionLink("Doctor manage", "GetAllDoctorDetails", "Doctor", new { id = Session["Id"], username = Session["Username"] }, new { })</li>
+            <li class="link">
+                @Html.ActionLink("Edit profile", "GetoneAdminDetails", "Doctor", new { id = Session["Id"], username = Session["Username"] }, null)
+            </li>
+            <li class="link">
+                @Html.ActionLink("Contact manage", "GetAllcontactDetails", "Contact", new { id = Session["Id"], username = Session["Username"] }, null)
+            </li>
+            @*<li class="link">@Html.ActionLink("Register", "UserRegister", "Registration_", new { area = "" }, new { })</li>*@
+        </ul>
+        @*<button class="btn">Logo</button>*@
+        <span class="link">@Html.ActionLink("Logout", "Login", "Login", new { area = "" }, new { @class = "btn" })</span>
+    </nav>
+
+
+
+    @using (Html.BeginForm("adminRegister", "Doctor", FormMethod.Post, new { onsubmit = "return validateForm()" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h2>Register</h2>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.fullName, htmlAttributes: new { })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fullName, new { htmlAttributes = new { @class = "form-control", id = "fullname", @onfocusout = "Fullname11()" } })
+                    @Html.ValidationMessageFor(model => model.fullName, "", new { @class = "text-danger" })
+                    <div id="error"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.contactNumber, htmlAttributes: new { })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.contactNumber, new { htmlAttributes = new { @class = "form-control", id = "num", @onfocusout = "number()", Type = "text" } })
+                    @Html.ValidationMessageFor(model => model.contactNumber, "", new { @class = "text-danger" })
+                    <div id="error7"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", id = "em", @onfocusout = "email()" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    <div id="error8" style="padding-top:10px; color:red">@ViewBag.Message</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", id = "pass", @onfocusout = " password()" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    <div id="error9"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.confirmPassword, htmlAttributes: new { })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.confirmPassword, new { htmlAttributes = new { @class = "form-control", id = "cpass", @onfocusout = "cpassword()" } })
+                    @Html.ValidationMessageFor(model => model.confirmPassword, "", new { @class = "text-danger" })
+                    <div id="error10"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Register" class="btnlogin" />
+                </div>
+            </div>
+        </div>
+    }
+
+
+    <script>
+        function Fullname() {
+            var fieldInput = document.getElementById('fullname');
+            var errorDiv = document.getElementById("error");
+            var fieldValue = fieldInput.value.trim();
+
+            if (fieldInput === null) {
+                errorDiv.style.color = 'red';
+                errorDiv.innerHTML = 'Please enter  *';
+                fieldInput.style.borderColor = 'red';
+                fieldInput.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';
+            } else {
+                errorDiv.innerHTML = "";
+                fieldInput.style.borderColor = 'green';
+                fieldInput.style.backgroundColor = 'rgba(81, 255, 145, 0.1)';
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+﻿@model Doctor_Appointment_Booking.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+
+<html>
+<head>
+    <link href="~/Content/CSS/LoginCSS.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Home2.css" rel="stylesheet" />
+    <script src="~/Content/Javascript1/Login.js"></script>
+    <script src="~/Scripts/My_script/Login.js"></script>
+    <title>Health hub</title>
+</head>
+<body>
+    @*@using (Html.BeginForm("UserPage", "Home", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return validateForm()" }))*@
+
+
+    @*<div class="container">*@
+    <nav>
+        <div class="nav__logo">
+            <img src="~/Content/Image/logo-removebg-preview.png" width="70px" height="70px" />HEALTH Hub
+        </div>
+        <ul class="nav__links">
+            <li class="link">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { })</li>
+            <li class="link">@Html.ActionLink("About us", "About", "Home", new { area = "" }, new { })</li>
+            <li class="link">@Html.ActionLink("Contact us", "Contact", "Contact", new { area = "" }, new { })</li>
+            <li class="link">@Html.ActionLink("Register", "UserRegister", "Registration_", new { area = "" }, new { })</li>
+        </ul>
+        @*<small> @ViewBag.Message</small>*@
+        @Html.ActionLink("Login", "Login", "Login", new { @class = "btn" })
+    </nav>
+    @*</div>*@
+    @using (Html.BeginForm(new { enctype = "multipart/form-data", @onsubmit = "return validateForm()" }))
+    {
+        @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <h2>Login</h2>
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control",id = "Username", @onfocusout = "validateUsername()" } })
+            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            <br /><div id="error"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", id = "Password", @onfocusout = "validate()" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            <br /><div id="error1"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <br />
+            @*<input type="submit" value="Login" class="btnlogin" />*@
+            <input type="submit" value="Login" class="btnlogin" @*onclick="return validateForm()"*@ />
+        </div>
+    </div>
+    <p style="padding-bottom:10px; padding-left:100px">@Html.ActionLink("I doesn't have account", "UserRegister", "Registration_", new { area = "" }, new { })</p>
+</div>
+    }
+<script>
+       
+function validate() {
+    var passwordInput = document.getElementById('Password');
+        var errorSpan = document.getElementById('error1');
+        var password = passwordInput.value;
+       
+
+        if (password === '') {
+            errorSpan.style.color = '#FF0000';
+            errorSpan.innerHTML = 'Please enter your Password *';
+            passwordInput.style.borderColor = '#FF0000';
+            passwordInput.style.backgroundColor = 'rgba(255, 0, 0, 0.10)';
+            return false;
+        } else if (!password1(password)) {
+            errorSpan.style.color = '#FF0000';
+            errorSpan.innerHTML = 'Password valid password *';
+            passwordInput.style.borderColor = '#FF0000';
+            passwordInput.style.backgroundColor = 'rgba(255, 0, 0, 0.10)';
+            return false;
+        }
+        else {
+            errorSpan.innerHTML = '';
+            passwordInput.style.borderColor = '#00FF00';
+            passwordInput.style.backgroundColor = 'rgba(81, 255, 145, 0.10)';
+            return true;
+        }
+    }
+
+</script>
+  
+    <script src="~/Scripts/My_script/Login.js"></script>
+</body>
+</html>
+<SCRIPT type="text/javascript">
+    window.history.forward();
+    function noBack() { window.history.forward(); }
+</SCRIPT>
+
+<BODY onload="noBack();"
+      onpageshow="if (event.persisted) noBack();" onunload="">
+</BODY>

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "salesforce3", "salesforce3\salesforce3.csproj", "{6A07E8E1-137F-4708-8357-EBC1C9ED3F21}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A07E8E1-137F-4708-8357-EBC1C9ED3F21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A07E8E1-137F-4708-8357-EBC1C9ED3F21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A07E8E1-137F-4708-8357-EBC1C9ED3F21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A07E8E1-137F-4708-8357-EBC1C9ED3F21}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {030AA1E1-C3BE-42A4-88B5-3D80F96C4819}
+	EndGlobalSection
+EndGlobal

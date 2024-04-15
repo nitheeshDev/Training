@@ -1,0 +1,90 @@
+﻿/*total form align*/
+
+.form-horizontal {
+    margin-left: 450px;
+    margin-top: 60px;
+    margin-bottom: 0px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin-right:300px;
+    width:400px;
+    line-height:10px;
+    background-color:whitesmoke;
+    height:auto;
+}
+#label {
+    width: 90%;
+   
+}
+/*label and input align*/
+.form-group {
+    /*width: 100%;*/
+    padding-left: 45px;
+    margin-top: auto;
+  
+}
+    .form-group label{
+       padding-left:15px;
+    }
+    .form-control {
+        /*width: 300px;*/
+        width: 100%;
+    }
+/*.btnlogin {
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding: 1rem 2rem;
+
+    border: none;
+    font-size: 1rem;
+    color: var(--white);
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+    margin-bottom: 20px;
+}*/
+
+    .btnlogin:hover {
+        background-color: var(--primary-color-dark);
+    }
+
+    /*h2*/
+.form-horizontal h2 {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    color: var(--primary-color);
+}
+nav {
+    padding: 2rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background-color: whitesmoke;
+}
+/*
+.nav__logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.nav__links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}*/
+
+.col-md-10 div
+{
+    line-height:10px;
+}
+
+/*Validation error msg*/
+#error, #error1, #error2, #error3, #error4, #error5, #error6, #error7, #error8, #error9, #error10, #error11, #error12, #error13{
+    padding-top:10px;
+}

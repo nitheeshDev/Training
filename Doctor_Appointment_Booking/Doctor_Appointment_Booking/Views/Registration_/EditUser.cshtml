@@ -1,0 +1,163 @@
+﻿@model Doctor_Appointment_Booking.Models.User_Register_Model
+
+@{
+    ViewBag.Title = "EditUser";
+}
+
+<html lang="en">
+<head>
+    <title>Health hub</title>
+    <link href="~/Content/CSS/LoginCSS.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Home2.css" rel="stylesheet" />
+    <script src="~/Scripts/My_script/Userregister.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="nav__logo">
+            <img src="~/Content/Image/logo-removebg-preview.png" width="70px" height="70px" />HEALTH Hub
+        </div>
+        <ul class="nav__links">
+            <li class="link"> <a href="@Url.Action("UserPage", "Home", new { id = Session["Id"], username = Session["Username"] } )">Home</a></li>
+            <li class="link"> <a href="@Url.Action("Bokingdoctor", "DoctorBooking", new { id = Session["Id"], username = Session["Username"] })">Doctors profile</a> </li>
+            <li class="link">
+                @Html.ActionLink("Edit profile", "GetsingleDetails", "Registration_", new { id = Session["Id"], username = Session["Username"] }, null)
+            </li>
+            <li class="link">
+                @Html.ActionLink("Status", "GetPatientStatus", "Patient", new { id = Session["Id"], username = Session["Username"] }, null)
+            </li>
+        </ul>
+        @*<small> @ViewBag.Message</small>*@
+        @Html.ActionLink("Logout", "Index", "Home", null, new { @class = "btn" })
+    </nav>
+
+    @using (Html.BeginForm("EditUser", "Registration_", FormMethod.Post, new { onsubmit = "return validateForm()" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h2>Update</h2>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Fullname, htmlAttributes: new { @class = "", id = "label" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Fullname, new { htmlAttributes = new { @class = "form-control", id = "fullname", @onfocusout = "Fullname11()" } })
+                    @Html.ValidationMessageFor(model => model.Fullname, "", new { @class = "text-danger" })
+                    <div id="error"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "" })
+                <div class="col-md-10">
+                    @{
+                        var genderOptions = new List<SelectListItem>
+                    {
+                new SelectListItem { Text = "Gender", Value = "" }, // An option for "Gender" with an empty value
+                new SelectListItem { Text = "Male", Value = "Male" },
+                new SelectListItem { Text = "Female", Value = "Female" },
+                new SelectListItem { Text = "Other", Value = "Other" }
+            };
+                    }
+                    @Html.DropDownListFor(model => model.Gender, genderOptions, new { @class = "form-control", id = "Gender", @onfocusout = "Gender1()" })
+                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                    <div id="error1"></div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", id = "DOB", @onfocusout = "Dateofbirth()" } })
+                    @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                    <div id="error2"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Age, new
+                    {
+                        htmlAttributes = new
+                        {
+                            @class = "form-control"@*, id = "ageDispla", @onfocusout = "Userage()"*@}
+})
+                    @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+                    <div id="ageDisplay"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", id = "state", @onfocusout = "state1()" } })
+                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                    <div id="error4"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", id = "cityid", @onfocusout = "city()" } })
+                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                    <div id="error5"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", id = "add", @onfocusout = "address()" } })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    <div id="error6"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Contact_number, htmlAttributes: new { @class = "" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Contact_number, new { htmlAttributes = new { @class = "form-control", id = "num", @onfocusout = "number()" } })
+                    @Html.ValidationMessageFor(model => model.Contact_number, "", new { @class = "text-danger" })
+                    <div id="error7"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", id = "em", @onfocusout = "email()", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    <div id="error8"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", id = "pass", @onfocusout = "password()" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    <div id="error9"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Confirmpassword, htmlAttributes: new { @class = "" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Confirmpassword, new { htmlAttributes = new { @class = "form-control", id = "cpass", @onfocusout = "cpassword()" } })
+                    @Html.ValidationMessageFor(model => model.Confirmpassword, "", new { @class = "text-danger" })
+                    <div id="error10"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Update" class="btnlogin" />
+                </div>
+            </div>
+        </div>
+    }
+
+</body>
+</html>

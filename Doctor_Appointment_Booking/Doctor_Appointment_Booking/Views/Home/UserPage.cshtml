@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "UserPage";
+}
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <title>Health hub</title>
+    <link href="~/Content/CSS/LoginCSS.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Home2.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="container1">
+        <nav>
+            <div class="nav__logo">
+                <img src="~/Content/Image/logo-removebg-preview.png" width="70px" height="70px" />HEALTH Hub
+            </div>
+            <ul class="nav__links">
+                <li class="link"> <a href="@Url.Action("UserPage", "Home", new { id = Session["Id"], username = Session["Username"] } )">Home</a></li>
+                <li class="link"> <a href="@Url.Action("Bokingdoctor", "DoctorBooking", new { id = Session["Id"], username = Session["Username"] })">Doctors profile</a> </li>
+                <li class="link">
+                    @Html.ActionLink("Edit profile", "GetsingleDetails", "Registration_", new { id = Session["Id"], username = Session["Username"] }, null)
+                </li>
+
+                @*<li class="link">
+            <span class="custom-tooltip" data-tooltip="@ViewBag.status">Status</span>
+        </li>*@
+                <li class="link">
+                    @Html.ActionLink("Status", "GetPatientStatus", "Patient", new { id = Session["Id"], username = Session["Username"] }, null)
+                </li>
+
+
+            </ul>
+            @*<small> @ViewBag.Message</small>*@
+            @Html.ActionLink("Logout", "Index", "Home", null, new { @class = "btn" })
+        </nav>
+        <header class="header">
+            <div class="content">
+                @*<h2>@ViewBag.Message</h2>*@
+                <h1><span>Get Quick</span><br />Medical Services</h1>
+                <p>
+                    In today's fast-paced world, access to prompt and efficient medical
+                    services is of paramount importance. When faced with a medical
+                    emergency or seeking immediate medical attention, the ability to
+                    receive quick medical services can significantly impact the outcome
+                    of a situation.
+                </p>
+                @Html.ActionLink("Get Appointment Now", "Bokingdoctor", "DoctorBooking", new { id = Session["Id"], username = Session["Username"] }, new { @class = "btn1" })
+                @*<h2>@ViewBag.Message</h2>*@
+            </div>
+            <div class="image">
+                <span class="image__bg"></span>
+                <img src="~/Content/Image/header-bg.png" alt="header image" />
+
+            </div>
+        </header>
+
+    </div>
+    @*<div class="slideshow-container">
+
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                <img src="~/Content/Image/10.jpg" style="width:100%"/>
+                <div class="text">Caption Text</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 3</div>
+                <img src="~/Content/Image/11.jpg" style="width:100%" />
+                <div class="text">Caption Two</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                <img src="~/Content/Image/12.jpg" style="width:100%"/>
+                <div class="text">Caption Three</div>
+            </div>
+
+        </div>
+        <br>
+
+        <div style="text-align:center">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>*@
+    </body>
+</html>
+<SCRIPT type="text/javascript">
+    window.history.forward();
+    function noBack() { window.history.forward(); }
+</SCRIPT>
+
+<BODY onload="noBack();"
+      onpageshow="if (event.persisted) noBack();" onunload="">
+</BODY>

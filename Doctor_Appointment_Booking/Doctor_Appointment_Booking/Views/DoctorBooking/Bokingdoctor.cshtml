@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Doctor_Appointment_Booking.Models.DoctorBookingModel>
+
+@{
+    ViewBag.Title = "Bokingdoctor";
+}
+
+<html>
+<head>
+    <title>Health hub</title>
+    <link href="~/Content/CSS/LoginCSS.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Home2.css" rel="stylesheet" />
+    <link href="~/Content/CSS/card.css" rel="stylesheet" />
+</head>
+<body>
+    <nav>
+        <div class="nav__logo">
+            <img src="~/Content/Image/logo-removebg-preview.png" width="70px" height="70px" />HEALTH Hub
+        </div>
+        <ul class="nav__links">
+            <li class="link"> <a href="@Url.Action("UserPage", "Home", new { id = Session["Id"], username = Session["Username"] } )">Home</a></li>
+            <li class="link">
+                @Html.ActionLink("Doctors profile", "Bokingdoctor", "DoctorBooking", new { username = @Session["Username"] })
+            </li>
+            <li class="link">
+                @Html.ActionLink("Edit profile", "GetsingleDetails", "Registration_", new { id = Session["Id"], username = Session["Username"] }, null)
+            </li>
+            <li class="link">
+                @Html.ActionLink("Status", "GetPatientStatus", "Patient", new { id = Session["Id"], username = Session["Username"] }, null)
+            </li>
+
+
+        </ul>
+        @*<small> @ViewBag.Message</small>*@
+        @Html.ActionLink("Logout", "Index", "Home", null, new { @class = "btn" })
+    </nav>
+    <h2>Doctors</h2>
+
+    <div class="container mt-4">
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card" style="height:400px">
+                        <img src="data:image;base64,@(item.Profile != null ? Convert.ToBase64String(item.Profile) : string.Empty)" class="card-img-top" alt="Doctor Image" style="height:200px">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.fullName)</h5>
+                            <p class="card-text">ID: @Html.DisplayFor(modelItem => item.doctorID)</p>
+                            <p class="card-text">Specialization: @Html.DisplayFor(modelItem => item.doctorSpecilization)</p>
+                            <a href="@Url.Action("PatientBook", "Patient" ,new { area = "", id = item.doctorID ,username = Session["Username"] })" class="btn-primary">Get appointment</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+   
+</body>
+</html>
+<SCRIPT type="text/javascript">
+        window.history.forward();
+        function noBack() { window.history.forward(); }
+</SCRIPT>
+
+<BODY onload="noBack();"
+      onpageshow="if (event.persisted) noBack();" onunload="">
+</BODY>

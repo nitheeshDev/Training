@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "User";
+}
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
+          rel="stylesheet" />
+    @*<link href="~/Content/CSS/IndexCSS.css" rel="stylesheet" />*@
+    @*<link href="~/Content/CSS/Home.css" rel="stylesheet" />*@
+    <link href="~/Content/CSS/Userpage.css" rel="stylesheet" />
+    <link href="~/Content/CSS/LoginCSS.css" rel="stylesheet" />
+    <script src="~/Content/JavaScript/Imageslide.js"></script>
+    <title>Health hub</title>
+</head>
+<body>
+
+    <nav>
+        <div class="nav__logo">
+            <img src="~/Content/Image/logo-removebg-preview.png" width="70px" height="70px" />HEALTH Hub
+        </div>
+        <ul class="nav__links">
+            <li class="link">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { })</li>
+            <li class="link">@Html.ActionLink("About us", "About", "Home", new { area = "" }, new { })</li>
+            <li class="link">@Html.ActionLink("Contact us", "Contact", "Contact", new { area = "" }, new { })</li>
+            <li class="link">@Html.ActionLink("Register", "UserRegister", "Registration_", new { area = "" }, new { })</li>
+        </ul>
+        @*<small> @ViewBag.Message</small>*@
+        @Html.ActionLink("Login", "Login", "Login", new { @class = "btn" })
+    </nav>
+    @RenderBody()
+</body>
+</html>

@@ -1,0 +1,179 @@
+﻿@model Doctor_Appointment_Booking.Models.Doctor_Register_Model
+
+@{
+    ViewBag.Title = "DoctorRegister";
+}
+
+<html>
+<head>
+    <link href="~/Content/CSS/LoginCSS.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Home2.css" rel="stylesheet" />
+    @*<script src="~/Content/Javascript1/Login.js"></script>*@
+    @*<script src="~/Scripts/My_script/Login.js"></script>*@
+    <title>Health hub</title>
+    <script src="~/Scripts/My_script/Doctor.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="nav__logo">
+            <img src="~/Content/Image/logo-removebg-preview.png" width="60px" height="60px" />HEALTH Hub
+        </div>
+        <ul class="nav__links">
+            <li class="link">@Html.ActionLink("Admin manage", "GetAllAdminDetails", "Doctor", new { id = Session["Id"], username = Session["Username"] }, new { })</li>
+            <li class="link">@Html.ActionLink("User manage", "GetAllUserDetails", "Registration_", new { id = Session["Id"], username = Session["Username"] }, new { })</li>
+            <li class="link">@Html.ActionLink("Doctor manage", "GetAllDoctorDetails", "Doctor", new { id = Session["Id"], username = Session["Username"] }, new { })</li>
+            <li class="link">
+                @Html.ActionLink("Edit profile", "GetoneAdminDetails", "Doctor", new { id = Session["Id"], username = Session["Username"] }, null)
+            </li>
+            <li class="link">
+                @Html.ActionLink("Contact manage", "GetAllcontactDetails", "Contact", new { id = Session["Id"], username = Session["Username"] }, null)
+            </li>
+            @*<li class="link">@Html.ActionLink("Register", "UserRegister", "Registration_", new { area = "" }, new { })</li>*@
+        </ul>
+        @*<button class="btn">Logo</button>*@
+        <span class="link">@Html.ActionLink("Logout", "Login", "Login", new { area = "" }, new { @class = "btn" })</span>
+    </nav>
+
+    @using (Html.BeginForm("DoctorRegister", "Doctor", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return validateDoctor()" }))
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h2>Register</h2>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.fullName, htmlAttributes: new { })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.fullName, new { htmlAttributes = new { @class = "form-control", id = "fullname", @onfocusout = "Fullname11()" } })
+            @Html.ValidationMessageFor(model => model.fullName, "", new { @class = "text-danger" })
+            <div id="error"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.doctorID, htmlAttributes: new { })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.doctorID, new { htmlAttributes = new { @class = "form-control", id = "doc", @onfocusout = "doctorid1()" } })
+            @Html.ValidationMessageFor(model => model.doctorID, "", new { @class = "text-danger" })
+            <div id="error11"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.doctorSpecialization, htmlAttributes: new { })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.doctorSpecialization, new { htmlAttributes = new { @class = "form-control", id = "doc1", @onfocusout = "doctor()" } })
+            @Html.ValidationMessageFor(model => model.doctorSpecialization, "", new { @class = "text-danger" })
+            <div id="error12"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @{
+                var genderOptions = new List<SelectListItem>
+                            {
+                new SelectListItem { Text = "Gender", Value = "" }, // An option for "Gender" with an empty value
+                new SelectListItem { Text = "Male", Value = "Male" },
+                new SelectListItem { Text = "Female", Value = "Female" },
+                new SelectListItem { Text = "Other", Value = "Other" }
+            };
+            }
+            @Html.DropDownListFor(model => model.Gender, genderOptions, new { @class = "form-control", id = "Gender", @onfocusout = "Gender1()" })
+            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            <div id="error1"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", id = "DOB", @onfocusout = "Dateofbirth()" } })
+            @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+            <div id="error2"></div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentDate = new Date();
+            var dateInput = document.getElementById('DOB');
+            var formattedCurrentDate = currentDate.toISOString().slice(0, 10);
+            dateInput.setAttribute('max', formattedCurrentDate);
+        });
+    </script>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Address, htmlAttributes: new { })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", id = "add", @onfocusout = "address()" } })
+            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            <div id="error6"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.contactNumber, htmlAttributes: new { })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.contactNumber, new { htmlAttributes = new { @class = "form-control", id = "num", @onfocusout = "number()" } })
+            @Html.ValidationMessageFor(model => model.contactNumber, "", new { @class = "text-danger" })
+            <div id="error7"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", id = "em", @onfocusout = "email()" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            <div id="error8" style="color:red">@ViewBag.Message</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", id = "pass", @onfocusout = "password()" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            <div id="error9"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", id = "cpass", @onfocusout = "cpassword()" } })
+            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+            <div id="error10"></div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Profile, htmlAttributes: new { })
+        <div class="col-md-10">
+            <input type="file" name="imageData" id="imageData" class="form-control" />
+            @Html.ValidationMessageFor(model => model.Profile, "", new { @class = "text-danger" })
+            <div id="error13" style="color:red">@ViewBag.ex</div>
+            <div id="error13" style="color:red">@ViewBag.size</div>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Register" class="btnlogin" />
+        </div>
+    </div>
+</div>
+    }
+    @*<script src="~/Scripts/My_script/Doctor.js"></script>*@ 
+</body>
+</html>
+<SCRIPT type="text/javascript">
+    window.history.forward();
+    function noBack() { window.history.forward(); }
+</SCRIPT>
+
+<BODY onload="noBack();"
+      onpageshow="if (event.persisted) noBack();" onunload="">
+</BODY>

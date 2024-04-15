@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<html>
+<head>
+    <link href="~/Content/CSS/AboutUs.css" rel="stylesheet" />
+    <title>Health hub</title>
+    <link href="~/Content/CSS/LoginCSS.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Home2.css" rel="stylesheet" />
+
+</head>
+<body>
+    <nav>
+        <div class="nav__logo">
+            <img src="~/Content/Image/logo-removebg-preview.png" width="70px" height="70px" />HEALTH Hub
+        </div>
+        <ul class="nav__links">
+            <li class="link">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { })</li>
+            <li class="link">@Html.ActionLink("About us", "About", "Home", new { area = "" }, new { })</li>
+            <li class="link">@Html.ActionLink("Contact us", "Contact", "Contact", new { area = "" }, new { })</li>
+            <li class="link">@Html.ActionLink("Register", "UserRegister", "Registration_", new { area = "" }, new { })</li>
+        </ul>
+        @*<small> @ViewBag.Message</small>*@
+        <a href="@Url.Action("Login", "Login")" class="btn"> Login </a>
+    </nav>
+    <div class="about-section">
+        <p>
+            Get Quick
+            Medical Services
+        </p>
+        <p>In today's fast-paced world, access to prompt and efficient medical services is of paramount importance. When faced with a medical emergency or seeking immediate medical attention, the ability to receive quick medical services can significantly impact the outcome of a situation.</p>
+    </div>
+    <div class="card-container">
+        <div class="card">
+            <img src="~/Content/Image/sad.png" alt="Image 1">
+            <h3>Chairman</h3>
+            <div>Shiva ganesh</div>
+            <p>He plays a pivotal role in fostering the effectiveness of the Board and individual Directors, both inside and outside the board room.</p>
+        </div>
+        <div class="card">
+            <img src="~/Content/Image/cheif doc.jpeg" alt="Image 2">
+            <h3>Cheif doctor</h3>
+            <div>Sundhar</div>
+            <p> He is responsible for ensuring the smooth delivery of health care to the employees of the Trust and their families.</p>
+            
+        </div>
+        <div class="card">
+            <img src="~/Content/Image/our team.jpg" alt="Image 3">
+            <h3>Our team</h3>
+            <p>Health professionals—physicians, advanced practice registered nurses, other registered nurses, physician assistants, clinical pharmacists, and other healthcare professionals</p>
+        </div>
+    </div>
+</body>
+</html>

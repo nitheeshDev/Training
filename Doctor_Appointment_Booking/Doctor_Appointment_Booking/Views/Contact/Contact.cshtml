@@ -1,0 +1,57 @@
+﻿@model Doctor_Appointment_Booking.Models.ContactModel
+
+@{
+    ViewBag.Title = "Contact";
+}
+
+<html>
+<head>
+    <title>Health hub</title>
+    <link href="~/Content/CSS/LoginCSS.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Home2.css" rel="stylesheet" />
+
+    <link href="~/Content/CSS/Contactus.css" rel="stylesheet" />
+   
+</head>
+<body>
+    <nav>
+        <div class="nav__logo">
+            <img src="~/Content/Image/logo-removebg-preview.png" width="70px" height="70px" />HEALTH Hub
+        </div>
+        <ul class="nav__links">
+            <li class="link">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { })</li>
+            <li class="link">@Html.ActionLink("About us", "About", "Home", new { area = "" }, new { })</li>
+            <li class="link">@Html.ActionLink("Contact us", "Contact", "Contact", new { area = "" }, new { })</li>
+            <li class="link">@Html.ActionLink("Register", "UserRegister", "Registration_", new { area = "" }, new { })</li>
+        </ul>
+        @*<small> @ViewBag.Message</small>*@
+        <a href="@Url.Action("Login", "Login")" class="btn"> Login </a>
+    </nav>
+    <h1>Contact us</h1>
+    <p>Please fill out the form below to get in touch with us:</p>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+<form>
+    @using (Html.BeginForm("Home", "Home", FormMethod.Post, new { onsubmit = "return validatecontact()" }))
+    {
+        <label for="name">Name:</label>
+        @Html.TextBoxFor(model => model.Name, new { id = "fullname", @onfocusout = "name1()" })
+        <div id="error"></div>
+
+        <label for="email">Email:</label>
+        @Html.TextBoxFor(model => model.Email, new { id = "em", @onfocusout = "email1()" })
+        <div id="error1"></div>
+
+        <label for="message">Message:</label>
+        @Html.TextAreaFor(model => model.Message, new { id = "mess", @onfocusout = "mess1()" })
+        <div id="error2"></div>
+
+        <input type="submit" value="Submit" class="bntc"/>
+    }
+</form>
+    }
+<script src="~/Scripts/My_script/contact.js"></script>
+</body>
+</html>

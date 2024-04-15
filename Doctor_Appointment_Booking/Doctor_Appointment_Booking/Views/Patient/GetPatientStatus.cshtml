@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Doctor_Appointment_Booking.Models.PatientModel>
+
+@{
+    ViewBag.Title = "GetPatientStatus";
+}
+
+<html >
+<head>
+    <title>Health hub</title>
+    <link href="~/Content/CSS/LoginCSS.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Home2.css" rel="stylesheet" />
+    <link href="~/Content/CSS/table.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="container1">
+        <nav>
+            <div class="nav__logo">
+                <img src="~/Content/Image/logo-removebg-preview.png" width="70px" height="70px" />HEALTH Hub
+            </div>
+            <ul class="nav__links">
+                <li class="link"> <a href="@Url.Action("UserPage", "Home", new { id = Session["Id"], username = Session["Username"] } )">Home</a></li>
+                <li class="link"> <a href="@Url.Action("Bokingdoctor", "DoctorBooking", new { id = Session["Id"], username = Session["Username"] })">Doctors profile</a> </li>
+                <li class="link">
+                    @Html.ActionLink("Edit profile", "GetsingleDetails", "Registration_", new { id = Session["Id"], username = Session["Username"] }, null)
+                </li>
+
+                @*<li class="link">
+            <span class="custom-tooltip" data-tooltip="@ViewBag.status">Status</span>
+        </li>*@
+                <li class="link">
+                    @Html.ActionLink("Status", "GetPatientStatus", "Patient", new { id = Session["Id"], username = Session["Username"] }, null)
+                </li>
+
+
+            </ul>
+            @*<small> @ViewBag.Message</small>*@
+            @Html.ActionLink("Logout", "Index", "Home", null, new { @class = "btn" })
+        </nav>
+        <h2 style="text-align:center">Status</h2>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DocId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Username)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.patientissue)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.visitDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VisitTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+               
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DocId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.patientissue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.visitDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VisitTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+
+                </tr>
+            }
+            
+        </table>
+        </div>
+        </body>
+</html>

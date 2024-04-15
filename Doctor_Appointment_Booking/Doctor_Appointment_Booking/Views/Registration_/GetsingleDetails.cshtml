@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Doctor_Appointment_Booking.Models.User_Register_Model>
+
+@{
+    ViewBag.Title = "GetsingleDetails";
+}
+<html lang="en">
+<head>
+    <title>Health hub</title>
+    <link href="~/Content/CSS/LoginCSS.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Home2.css" rel="stylesheet" />
+    <script src="~/Content/JavaScript/Imageslide.js"></script>
+    <title>Health hub</title>
+    <style>
+        .card-text strong {
+            justify-content: left;
+        }
+
+        .card-body1 {
+            justify-content: left;
+            padding-top: 20px;
+        }
+
+        .card-text {
+            padding-top: 20px;
+            line-height: 50px;
+        }
+
+        .card1 {
+            margin-left: 450px;
+            border: 1px solid grey;
+            width: 400px;
+            padding-left: 30%;
+            margin-top: 20px;
+        }
+
+        h5 {
+            padding-top: 20px;
+        }
+
+        .btn btn-primary {
+            padding-bottom: 20px;
+        }
+    </style>
+
+</head>
+<body>
+    <nav>
+        <div class="nav__logo">
+            <img src="~/Content/Image/logo-removebg-preview.png" width="70px" height="70px" />HEALTH Hub
+        </div>
+        <ul class="nav__links">
+            <li class="link"> <a href="@Url.Action("UserPage", "Home", new { id = Session["Id"], username = Session["Username"] } )">Home</a></li>
+            @*<li class="link"><a href="#">Services</a></li>*@
+            @*<li class="link">
+                   @Html.ActionLink("Doctors profile","Bokingdoctor","DoctorBooking", new { username = @Session["Username"] })
+                </li>*@
+            <li class="link"> <a href="@Url.Action("Bokingdoctor", "DoctorBooking", new { id = Session["Id"], username = Session["Username"] })">Doctors profile</a> </li>
+            <li class="link">
+                @Html.ActionLink("Edit profile", "GetsingleDetails", "Registration_", new { id = Session["Id"], username = Session["Username"] }, null)
+            </li>
+
+            <li class="link">
+                @Html.ActionLink("Status", "GetPatientStatus", "Patient", new { id = Session["Id"], username = Session["Username"] }, null)
+            </li>
+
+
+        </ul>
+        @*<small> @ViewBag.Message</small>*@
+        @Html.ActionLink("Logout", "Index", "Home", null, new { @class = "btn" })
+    </nav>
+
+    <div>
+        <div class="row">
+            @foreach (var i in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card1" style="align-items:center">
+                        <div class="card-body1">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => i.Fullname)</h5>
+                            <p class="card-text">
+                                <strong>Gender:</strong> @Html.DisplayFor(modelItem => i.Gender)<br />
+                                <strong>Date of Birth:</strong> @Html.DisplayFor(modelItem => i.DateOfBirth)<br />
+                                <strong>Age:</strong> @Html.DisplayFor(modelItem => i.Age)<br />
+                                <strong>State:</strong> @Html.DisplayFor(modelItem => i.State)<br />
+                                <strong>City:</strong> @Html.DisplayFor(modelItem => i.City)<br />
+                                <strong>Address:</strong> @Html.DisplayFor(modelItem => i.Address)<br />
+                                <strong>Contact Number:</strong> @Html.DisplayFor(modelItem => i.Contact_number)<br />
+                                <strong>Email:</strong> @Html.DisplayFor(modelItem => i.Email)
+                            </p>
+                            <a href="@Url.Action("EditUser", "Registration_", new { id = Session["Id"], username = Session["Username"]})" class="btn btn-primary">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+</body>
+</html>

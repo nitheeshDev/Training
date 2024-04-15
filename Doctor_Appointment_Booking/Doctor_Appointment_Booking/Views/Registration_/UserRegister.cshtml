@@ -1,0 +1,246 @@
+﻿@model Doctor_Appointment_Booking.Models.User_Register_Model
+
+@{
+    ViewBag.Title = "UserRegister";
+}
+ 
+
+<html>
+<head>
+    <link href="~/Content/CSS/LoginCSS.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Home2.css" rel="stylesheet" />
+    <title>Health hub</title>
+    <script src="~/Scripts/My_script/Userregister.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <nav>
+        <div class="nav__logo">
+            <img src="~/Content/Image/logo-removebg-preview.png" width="70px" height="70px" />HEALTH Hub
+        </div>
+        <ul class="nav__links">
+            <li class="link">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { })</li>
+            <li class="link">@Html.ActionLink("About us", "About", "Home", new { area = "" }, new { })</li>
+            <li class="link">@Html.ActionLink("Contact us", "Contact", "Contact", new { area = "" }, new { })</li>
+            <li class="link">@Html.ActionLink("Register", "UserRegister", "Registration_", new { area = "" }, new { })</li>
+        </ul>
+        @*<small> @ViewBag.Message</small>*@
+        <a href="@Url.Action("Login", "Login")" class="btn">Login </a>
+    </nav>
+
+    @using (Html.BeginForm("UserRegister", "Registration_", FormMethod.Post, new { onsubmit = "return validateForm()" }))
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h2>Register</h2>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Fullname, htmlAttributes: new { @class = "", id = "label" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Fullname, new { htmlAttributes = new { @class = "form-control", id = "fullname", @onfocusout = "Fullname11()", placeholder = "Fullname" } })
+            @Html.ValidationMessageFor(model => model.Fullname, "", new { @class = "text-danger" })
+            <div id="error"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @{
+                var genderOptions = new List<SelectListItem>
+                            {
+                new SelectListItem { Text = "Gender", Value = "" },
+                new SelectListItem { Text = "Male", Value = "Male" },
+                new SelectListItem { Text = "Female", Value = "Female" },
+                new SelectListItem { Text = "Other", Value = "Other" }
+            };
+            }
+            @Html.DropDownListFor(model => model.Gender, genderOptions, new { @class = "form-control", id = "Gender", @onfocusout = "Gender1()" })
+            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            <div id="error1"></div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", id = "DOB", @onfocusout = "Dateofbirth123()" } })
+            @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+            <div id="error2"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentDate = new Date();
+            var dateInput = document.getElementById('DOB');
+            var formattedCurrentDate = currentDate.toISOString().slice(0, 10);
+            dateInput.setAttribute('max', formattedCurrentDate);
+        });
+    </script>
+
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", id = "DOB", @onfocusout = "Dateofbirth()" } })
+                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                <div id="error2"></div>
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control", id = "AGE", @onfocusout = "Userage()", placeholder = "Age" } })
+            @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+            <div id="error3"></div>
+        </div>
+    </div>
+    @functions {
+        public SelectList GetStateSelectList()
+        {
+            var states = new List<SelectListItem>
+                {
+            new SelectListItem { Value = "", Text = "Select a State" },
+            new SelectListItem { Value = "Tamil nadu", Text = "Tamil Nadu" },
+            new SelectListItem { Value = "Kerala", Text = "Kerala" },
+            new SelectListItem { Value = "Karnataka", Text = "Karnataka" },
+            new SelectListItem { Value = "Andhra Pradesh", Text = "Andhra Pradesh" },
+            new SelectListItem { Value = "Telangana", Text = "Telangana" },
+            new SelectListItem { Value = "Maharashtra", Text = "Maharashtra" }
+        };
+
+            return new SelectList(states, "Value", "Text");
+        }
+    }
+    <div class="form-group">
+        @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.State, GetStateSelectList(), new { @class = "form-control", id = "state", onchange = "state1()" , @onfocusout = "state123()" })
+            @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+            <div id="error4"></div>
+        </div>
+    </div>
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.City, new SelectList(new List<SelectListItem>(), "Value", "Text"), "Select a City", new { @class = "form-control", id = "cityid" })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                <div id="error5"></div>
+            </div>
+        </div>*@
+    <div class="form-group">
+        @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", id = "cityid", placeholder = "City" , @onfocusout = "city123()" } })
+            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            <div id="error5"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", id = "add", @onfocusout = "address123()", placeholder = "Address" } })
+            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            <div id="error6"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Contact_number, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Contact_number, new { htmlAttributes = new { @class = "form-control", id = "num", @onfocusout = "number()" , placeholder = "Contact number" } })
+            @Html.ValidationMessageFor(model => model.Contact_number, "", new { @class = "text-danger" })
+            <div id="error7"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", id = "em", @onfocusout = "email()" , placeholder = "Email" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            <div id="error8" style="padding-top:10px; color:red">@ViewBag.Message</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", id = "pass", @onfocusout = "password()", placeholder = "Password" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            <div id="error9"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Confirmpassword, htmlAttributes: new { @class = "" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Confirmpassword, new { htmlAttributes = new { @class = "form-control", id = "cpass", @onfocusout = "cpassword()" , placeholder = "Confirm password" } })
+            @Html.ValidationMessageFor(model => model.Confirmpassword, "", new { @class = "text-danger" })
+            <div id="error10"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Register" class="btnlogin" />
+        </div>
+    </div>
+    <p style="padding-bottom:10px; padding-left:100px">@Html.ActionLink("Already i have an account", "Login", "Login", new { area = "" }, new { })</p>
+</div>
+    }
+
+@*<script>
+    var citiesByState = {
+        "Tamil nadu": ["Chennai", "Coimatore", "Erode", "Karur", "Madurai", "Salem", "Trichy", "Tirunelveli", "Vellore", "Thanjavur", "Tiruppur"],
+        "Kerala": ["Kochi", "Thiruvananthapuram", "Kozhikode", "Thrissur", "Kollam", "Kottayam", "Palakkad", "Kannur"],
+        "Karnataka": ["Bengaluru", "Mysuru", "Hubli", "Mangaluru"],
+        "Andhra Pradesh": ["Vijayawada", "Visakhapatnam", "Tirupati", "Guntur", "Nellore"],
+        "Telangana": ["Hyderabad", "Warangal", "Karimnagar", "Khammam", "Nizamabad"],
+        "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad"]
+    };
+
+    function state1() {
+        var stateDropdown = document.getElementById("state");
+        var cityDropdown = document.getElementById("cityid");
+        var selectedState = stateDropdown.value;
+
+        cityDropdown.innerHTML = "";
+
+        var defaultOption = document.createElement("option");
+        defaultOption.text = "Select a City";
+        defaultOption.value = "";
+        cityDropdown.add(defaultOption);
+
+        var cities = citiesByState[selectedState];
+
+        if (cities) {
+            for (var i = 0; i < cities.length; i++) {
+                var option = document.createElement("option");
+                option.text = cities[i];
+                option.value = cities[i];
+                cityDropdown.add(option);
+            }
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var cityDropdown = document.getElementById("cityid");
+
+        if (selectedCity) {
+            cityDropdown.value = selectedCity;
+        }
+    });
+</script>*@
+
+</body>
+</html>
+
+
+
+
+

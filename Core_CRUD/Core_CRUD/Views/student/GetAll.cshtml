@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Core_CRUD.Models.Register>
+
+@{
+    ViewData["Title"] = "GetAll";
+}
+<a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Link Text</a>
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Student Details</h1>
+
+    <a asp-action="Insert" class="btn btn-success mb-3">New Student</a>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    @*<th scope="col">#</th>*@
+                    <th scope="col">Student Name</th>
+                    <th scope="col">Roll Number</th>
+                    <th scope="col">Level</th>
+                    <th scope="col">Date of Birth</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Contact Number</th>
+                    <th scope="col">Email</th>
+                   @* <th scope="col">Password</th>*@
+                    <th scope="col">Profile</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @*<th scope="row">@item.Id</th>*@
+                        <td>@item.StudentName</td>
+                        <td>@item.RollNumber</td>
+                        <td>@item.Level</td>
+                        <td>@item.DateOfBirth.ToString("MM/dd/yyyy")</td>
+                        <td>@item.Address</td>
+                        <td>@item.ContactNumber</td>
+                        <td>@item.Email</td>
+                        @*<td>@item.Password</td>*@
+                        <td>
+                            @{
+                                string base64String = Convert.ToBase64String(item.Profile);
+                            }
+                            <img src="data:image;base64,@base64String" alt="Profile" class="img-thumbnail" style="max-width: 90px; max-height: 90px;" />
+                        </td>
+                        <td>
+                            <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

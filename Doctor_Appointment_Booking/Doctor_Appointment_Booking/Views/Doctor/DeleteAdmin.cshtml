@@ -1,0 +1,108 @@
+﻿@model Doctor_Appointment_Booking.Models.AdminModel
+
+@{
+    ViewBag.Title = "DeleteAdmin";
+}
+
+
+<html>
+<head>
+    <title>Health hub</title>
+    <link href="~/Content/CSS/LoginCSS.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Home2.css" rel="stylesheet" />
+</head>
+<body>
+    <nav>
+        <div class="nav__logo">
+            <img src="~/Content/Image/logo-removebg-preview.png" width="60px" height="60px" />HEALTH Hub
+        </div>
+        <ul class="nav__links">
+            <li class="link">@Html.ActionLink("Admin manage", "GetAllAdminDetails", "Doctor", new { id = Session["Id"], username = Session["Username"] }, new { })</li>
+            <li class="link">@Html.ActionLink("User manage", "GetAllUserDetails", "Registration_", new { id = Session["Id"], username = Session["Username"] }, new { })</li>
+            <li class="link">@Html.ActionLink("Doctor manage", "GetAllDoctorDetails", "Doctor", new { id = Session["Id"], username = Session["Username"] }, new { })</li>
+            <li class="link">
+                @Html.ActionLink("Edit profile", "GetoneAdminDetails", "Doctor", new { id = Session["Id"], username = Session["Username"] }, null)
+            </li>
+            <li class="link">
+                @Html.ActionLink("Contact manage", "GetAllcontactDetails", "Contact", new { id = Session["Id"], username = Session["Username"] }, null)
+            </li>
+            @*<li class="link">@Html.ActionLink("Register", "UserRegister", "Registration_", new { area = "" }, new { })</li>*@
+        </ul>
+        @*<button class="btn">Logo</button>*@
+        <span class="link">@Html.ActionLink("Logout", "Login", "Login", new { area = "" }, new { @class = "btn" })</span>
+    </nav>
+
+
+    <h2>Delete admin</h2>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Role)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Role)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.fullName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fullName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.contactNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.contactNumber)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Password)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.confirmPassword)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.confirmPassword)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+            </div>
+        }
+    </div>
+    </body>
+</html>
+
+    <SCRIPT type="text/javascript">
+        window.history.forward();
+        function noBack() { window.history.forward(); }
+    </SCRIPT>
+
+    <BODY onload="noBack();"
+          onpageshow="if (event.persisted) noBack();" onunload="">
+    </BODY>

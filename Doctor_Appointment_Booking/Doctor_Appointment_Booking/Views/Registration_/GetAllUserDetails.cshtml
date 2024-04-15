@@ -1,0 +1,122 @@
+﻿@model IEnumerable<Doctor_Appointment_Booking.Models.User_Register_Model>
+
+@{
+    ViewBag.Title = "GetAllUserDetails";
+}
+
+
+<html>
+<head>
+    <title>Health hub</title>
+    <link href="~/Content/CSS/LoginCSS.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Home2.css" rel="stylesheet" />
+    <link href="~/Content/CSS/table.css" rel="stylesheet" />
+</head>
+<body>
+    <nav>
+        <div class="nav__logo">
+            <img src="~/Content/Image/logo-removebg-preview.png" width="60px" height="60px" />HEALTH Hub
+        </div>
+        <ul class="nav__links">
+            <li class="link">@Html.ActionLink("Admin manage", "GetAllAdminDetails", "Doctor", new { id = Session["Id"], username = Session["Username"] }, new { })</li>
+            <li class="link">@Html.ActionLink("User manage", "GetAllUserDetails", "Registration_", new { id = Session["Id"], username = Session["Username"] }, new { })</li>
+            <li class="link">@Html.ActionLink("Doctor manage", "GetAllDoctorDetails", "Doctor", new { id = Session["Id"], username = Session["Username"] }, new { })</li>
+            <li class="link">
+                @Html.ActionLink("Edit profile", "GetoneAdminDetails", "Doctor", new { id = Session["Id"], username = Session["Username"] }, null)
+            </li>
+            <li class="link">
+                @Html.ActionLink("Contact manage", "GetAllcontactDetails", "Contact", new { id = Session["Id"], username = Session["Username"] }, null)
+            </li>
+            @*<li class="link">@Html.ActionLink("Register", "UserRegister", "Registration_", new { area = "" }, new { })</li>*@
+        </ul>
+        @*<button class="btn">Logo</button>*@
+        <span class="link">@Html.ActionLink("Logout", "Login", "Login", new { area = "" }, new { @class = "btn" })</span>
+    </nav>
+    <h2>User details</h2>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fullname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.State)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contact_number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fullname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Contact_number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete_UserRegister", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</body>
+</html>
+<SCRIPT type="text/javascript">
+    window.history.forward();
+    function noBack() { window.history.forward(); }
+</SCRIPT>
+
+<BODY onload="noBack();"
+      onpageshow="if (event.persisted) noBack();" onunload="">
+</BODY>
